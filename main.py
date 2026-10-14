@@ -1,6 +1,6 @@
 import json
 from os.path import dirname, abspath, join
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -31,9 +31,20 @@ def countries():
     return list(data.keys())
 
 
+@app.get('/countries/{country}/cities')
+def cities(country: str):
+    return list(data[country].keys())
+
+
 @app.get('/countries/{country}/{city}/{month}')
 def monthly_average(country: str, city: str, month: str):
-    return data[country][city][month]
+    try:
+        return data[country][city][month]
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail="Historical data not found for this country, city, and month",
+        ) from exc
 
 # Generate the OpenAPI schema:
 openapi_schema = app.openapi()

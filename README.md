@@ -6,6 +6,43 @@ Gain more practical experience by using this repository that contains a Python W
 
 [![Powered by Awesome Copilot](https://img.shields.io/badge/Powered_by-Awesome_Copilot-blue?logo=githubcopilot)](https://aka.ms/awesome-github-copilot)
 
+## Run the application
+
+### Local setup
+
+Requires Python 3.10 or later. From the repository root, create and activate a
+virtual environment, install the dependencies, and start the API:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+In Windows PowerShell, activate the environment with
+`.venv\Scripts\Activate.ps1` instead. Open <http://127.0.0.1:8000/> to be
+redirected to the API documentation, or go directly to
+<http://127.0.0.1:8000/docs>.
+
+Run the test suite from the repository root with:
+
+```bash
+pytest
+```
+
+### GitHub Codespaces
+
+The dev container installs the dependencies and starts the API automatically.
+Open the forwarded **Application** port (8000), then visit `/docs` for the API
+documentation. To run the tests in the Codespaces terminal, activate its
+virtual environment first:
+
+```bash
+source /home/vscode/venv/bin/activate
+pytest
+```
+
 ## Requirements
 
 1. Enable your [GitHub Copilot service](https://github.com/github-copilot/signup)
